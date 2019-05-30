@@ -1,5 +1,8 @@
 
 var myUtil = require("../../utils/myUtil.js")
+var logger = require("../../utils/logUtils.js")
+var QQMapWX = require('../../lib/qqmap-wx-jssdk.js');
+var qqMapSDK;
 
 Page({
   data: {
@@ -11,6 +14,10 @@ Page({
 
   onLoad: function() {
     var that = this;
+    // 实例化API核心类
+    qqMapSDK = new QQMapWX({
+      key: 'EBMBZ-N5FWU-JYOVP-B3LKB-63JCQ-XBFHT'
+    });
     wx.getLocation({
       success: function(res) {
         var longitude = res.longitude;
@@ -142,6 +149,19 @@ Page({
       }
       case 2: { // 定位按钮
         this.mapCtx.moveToLocation();
+        break;
+      }
+      case 5: {
+        //跳转到报修页面
+        wx.navigateTo({
+          url: '../warn/warn',
+        })
+        //记录log，记录离开事件
+        logger.log(qqMapSDK, "/kafka/access", {
+          //离开页面
+          "etype": 1,
+          "page": "index"
+        })
         break;
       }
       case 6: { // 添加车辆控件被点击

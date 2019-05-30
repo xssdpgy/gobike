@@ -1,0 +1,26 @@
+<!--pages/warn/index.wxml-->
+<view class="container">
+<form bindsubmit="formSubmit">
+    <view>
+        <view class="weui-cell__bd">
+                    <input class="weui-input" name="bikeNo" placeholder="请输入车辆编号" />
+        </view>
+        <view class="title">请选择故障类型</view> 
+
+        <checkbox-group bindchange="checkboxChange" class="choose-grids">
+            
+                
+                    <checkbox value="刹车">刹车失灵</checkbox>
+                    <text>\n</text>
+                
+                    <checkbox value="车把">把套歪了</checkbox>
+               
+            
+        </checkbox-group>        
+    </view>
+    <view class="weui-btn-area">
+        <button class="weui-btn" type="primary" formType="submit">确定</button>
+    </view>
+</form>
+</view>
+
